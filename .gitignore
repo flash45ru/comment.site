@@ -4,6 +4,6 @@
 # composer vendor dir
 /vendor
 # composer upload dir
-/upload
+/upload/images/comments
 # composer itself is not needed
 composer.phar
