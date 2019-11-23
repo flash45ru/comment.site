@@ -1,4 +1,5 @@
 <?php include ROOT . '/views/layouts/header.php'; ?>
+
 <section>
     <div class="container" id="main-page">
         <div class="row main-form">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="password" class="cols-sm-2 control-label">Прикрепить
+                            <label for="image" class="cols-sm-2 control-label">Прикрепить
                                 изображение:</label>
                             <div class="cols-sm-10">
                                 <label class="btn btn-primary btn-load-image" for="image">

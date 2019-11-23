@@ -82,40 +82,34 @@ class CommentController extends AdminBase
 
                 if ($id) {
                     // Проверим, загружалось ли через форму изображение
-                    // Уменьшим до размеров 320х240
                     if (is_uploaded_file($image)) {
                         // Если загружалось, переместим его в нужную папку, дадим новое имя
-                        $moved = move_uploaded_file($image, ROOT . "/upload/images/comments/{$id}.{$resolution}");
+                        move_uploaded_file($image, ROOT . "/upload/images/comments/{$id}.{$resolution}");
+                        Comment::setImageCommentById($id, 'upload/images/comments/' . $id . '.' . $resolution);
                         // Кроп если больше 320х240
                         if (!$size) {
                             require 'vendor/autoload.php';
                             $imagePath = 'upload/images/comments/' . $id . '.' . $resolution;
                             $manager = new ImageManager(array('driver' => 'imagick'));
                             $manager->make($imagePath)->resize(320, 240)->save($imagePath);
-                            Comment::setImageCommentById($id, $imagePath);
-                        }
-                        if ($moved) {
-                            echo "Successfully uploaded";
-                        } else {
-                            echo "Not uploaded because of error #" . $_FILES["file"]["error"];
                         }
                     }
-                };
+                }
             }
-
         }
-
-        $commentList = array();
-        $commentList = Comment::getCommentList();
-
+        echo json_encode([
+            'status' => 2
+        ]);
+//        $commentList = array();
+//        $commentList = Comment::getCommentList();
+//
 //        ob_start();
 //        require ROOT . '/views/comment/index.php';
 //        $content = ob_get_clean();
-        echo json_encode([
-            'status' => 2,
-            //'content' => $content,
-        ]);
-
+//        echo json_encode([
+//            'status' => 'ok',
+//            'content' => $content
+//        ]);
         return true;
     }
 

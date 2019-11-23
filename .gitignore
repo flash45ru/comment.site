@@ -3,6 +3,7 @@
 
 # composer vendor dir
 /vendor
-
+# composer upload dir
+/upload
 # composer itself is not needed
 composer.phar
